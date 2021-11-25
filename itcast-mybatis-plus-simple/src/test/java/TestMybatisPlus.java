@@ -12,9 +12,15 @@ import java.util.List;
 public class TestMybatisPlus {
     @Test
     public void testUserList() throws Exception {
-        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-        //通过Mybatis Plus提供MybatisSqlSessionFactoryBuilder构建，通过MybatisSqlSessionFactoryBuilder构建后就实现MybatisPlus和Mybatis的整合
-        SqlSessionFactory sqlSessionFactory = new MybatisSqlSessionFactoryBuilder().build(inputStream);
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        //通过Mybatis Plus提供MybatisSqlSessionFactoryBuilder构建，
+        //通过MybatisSqlSessionFactoryBuilder构建后就实现MybatisPlus和Mybatis的整合
+        //import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder;
+        MybatisSqlSessionFactoryBuilder builder = new MybatisSqlSessionFactoryBuilder();
+
+        SqlSessionFactory sqlSessionFactory = builder.build(inputStream);
+
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         // 可以调用BaseMapper中定义的方法
